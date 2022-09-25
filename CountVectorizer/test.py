@@ -1,7 +1,8 @@
-from CountVectorizer import CountVectorizer
+from count_vectorizer import CountVectorizer
 
 
 def test(corpus):
+    """Tests simple count_vectorizer module operations with 100% coverage."""
     try:
         print('Initializing CountVectorizer...')
         vectorizer = CountVectorizer()
