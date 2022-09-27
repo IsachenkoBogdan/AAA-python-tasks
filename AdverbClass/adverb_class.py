@@ -18,8 +18,9 @@ class Advert(ColorizeMixin, NestedAttribute):
 
     def __init__(self, dictionary: dict):
         super().__init__(dictionary)
+        if 'title' not in self.__dict__.keys():
+            raise AttributeError('Advert object must have a title attribute')
         self.price: int = self.__dict__.get('price', 0)
-        print(self.__dict__)
 
     @property
     def price(self) -> int:
@@ -28,7 +29,7 @@ class Advert(ColorizeMixin, NestedAttribute):
     @price.setter
     def price(self, value: int):
         if value < 0:
-            raise ValueError("Price must be >= 0")
+            raise ValueError('Price must be >= 0')
         self._price = value
 
     def __repr__(self) -> str:
