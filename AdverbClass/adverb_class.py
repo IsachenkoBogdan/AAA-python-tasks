@@ -2,11 +2,18 @@ from keyword import iskeyword
 
 
 class ColorizeMixin:
+    """
+    Mixin class which, when inherited, 
+    changes the color of __str__ result to yellow.
+    """
     def __str__(self) -> str:
         return f"\033[1;{self.repr_color_code}m{self.__repr__()}"
 
 
 class NestedAttribute:
+    """
+    Inside-class for attributes of Advert.
+    """
     def __init__(self, dictionary: dict):
         self.__dict__ = \
             {k + '_' * iskeyword(k): NestedAttribute(v) if isinstance(v, dict)
@@ -14,6 +21,16 @@ class NestedAttribute:
 
 
 class Advert(ColorizeMixin, NestedAttribute):
+    """
+    creates ad advert-objects
+    with dynamic attributes and the following conditions:
+    
+    1) 'title' attribute exists at creation
+    2) 'price' attribute is non-negative
+    
+    if the nested attribute name is a keyword, 
+    then the attribute is created with the suffix '_'
+    """
     repr_color_code: int = 33
 
     def __init__(self, dictionary: dict):
