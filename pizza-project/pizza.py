@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
 from time import sleep
-from time_config import baking_time, delivery_time, waiting_time, chunk_size
+from time_config import baking_time, delivery_time, waiting_time
 from menu_class import MenuObject
 from helper_funcs import Logging
-from tqdm import tqdm
 
 loggers = {
     "bake": Logging("Your pizza is 🔥baked🔥 in {}s"),
@@ -60,8 +59,7 @@ class Pizza(ABC):
         implements the logic of pizza delivery to the customer
         """
         # Some Delivering logic, emulating delivering time with sleep
-        for _ in tqdm(range(chunk_size)):
-            sleep(delivery_time / chunk_size)
+        sleep(delivery_time)
 
     @staticmethod
     def pickup() -> None:
@@ -69,8 +67,7 @@ class Pizza(ABC):
         implements the pickup logic for the customer
         """
         # Some logic of pizza giving to customer
-        for _ in tqdm(range(chunk_size)):
-            sleep(waiting_time / chunk_size)
+        sleep(waiting_time)
 
     @classmethod
     def get_name(cls) -> str:
@@ -119,8 +116,7 @@ class Margherita(Pizza):
 
     def bake(self) -> None:
         # Some logic for Margherita baking
-        for _ in tqdm(range(chunk_size)):
-            sleep(baking_time[self.get_name()][self.size] / chunk_size)
+        sleep(baking_time[self.get_name()][self.size])
 
 
 class Pepperoni(Pizza):
@@ -132,8 +128,7 @@ class Pepperoni(Pizza):
 
     def bake(self) -> None:
         # Some logic for Pepperoni baking
-        for _ in tqdm(range(chunk_size)):
-            sleep(baking_time[self.get_name()][self.size] / chunk_size)
+        sleep(baking_time[self.get_name()][self.size])
 
 
 class Hawaiian(Pizza):
@@ -155,8 +150,7 @@ class Hawaiian(Pizza):
 
     def bake(self) -> None:
         # Some logic for Hawaiian baking
-        for _ in tqdm(range(chunk_size)):
-            sleep(baking_time[self.get_name()][self.size] / chunk_size)
+        sleep(baking_time[self.get_name()][self.size])
 
 
 menu = MenuObject(menu_text="PIZZA MENU",

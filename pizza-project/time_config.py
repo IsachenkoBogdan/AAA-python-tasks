@@ -5,4 +5,3 @@ baking_time = {
 }
 delivery_time = 2
 waiting_time = 1
-chunk_size = 1024

@@ -35,9 +35,21 @@ class MenuObject:
                 self.update(cls)
 
     def update(self, eat_cls) -> None:
+        """
+        adds an object to the menu,
+        takes all the necessary data from the passed class,
+        corresponding to the type of food
+        """
         self.menu.update({eat_cls.to_str(): ", ".join(eat_cls.ingredients())})
 
+    @property
+    def list(self) -> list:
+        return list(self.menu.keys())
+
     def __str__(self) -> str:
+        """
+        method for printing menu
+        """
         text = self.bound_text.center(self.bound_width, "-") + "\n"
         for position, recipe in self.menu.items():
             text += f"- {position}: {recipe}".ljust(self.bound_width) + "✅\n"

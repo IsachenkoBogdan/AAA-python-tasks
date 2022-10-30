@@ -27,7 +27,7 @@ class Logging:
         return wrapper
 
 
-def get_classes_from_module(module_name) -> list:
+def get_classes_from_module(module_name: str) -> list:
     return list(
         dict(
             inspect.getmembers(
