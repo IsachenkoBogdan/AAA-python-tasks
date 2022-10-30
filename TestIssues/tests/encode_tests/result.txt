@@ -1,0 +1,47 @@
+Trying:
+    encode('HELLO')
+Expecting:
+    '.... . .-.. .-.. ---'
+ok
+Trying:
+    encode('I LOVE YOU') #doctest: +NORMALIZE_WHITESPACE
+Expecting:
+    '..   .-.. --- ...- .   -.-- --- ..-'
+ok
+Trying:
+    encode('SOS')
+Expecting:
+    '... --- ...'
+ok
+Trying:
+    encode('A LOT OF PY CODE A LOT OF PY CODE A LOT OF PY CODE') #doctest: +ELLIPSIS
+Expecting:
+    '.-   .-.. --- - ...'
+ok
+Trying:
+    encode()
+Expecting:
+    Traceback (most recent call last):
+        ...
+    TypeError: encode() missing 1 required positional argument: 'message'
+ok
+Trying:
+    encode('hello')
+Expecting:
+    Traceback (most recent call last):
+        ...
+    KeyError: 'h'
+ok
+Trying:
+    encode(1337)
+Expecting:
+    Traceback (most recent call last):
+    TypeError: 'int' object is not iterable
+ok
+1 items had no tests:
+    test_encode
+1 items passed all tests:
+   7 tests in test_encode.test_encode_with_doctest
+7 tests in 2 items.
+7 passed and 0 failed.
+Test passed.

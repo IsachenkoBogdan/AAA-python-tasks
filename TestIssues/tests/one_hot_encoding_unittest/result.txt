@@ -1,0 +1,10 @@
+test_cities_str_eq (tests.one_hot_encoding_unittest.test_one_hot_encoding.TestOneHotEncoder) ... ok
+test_exceptions (tests.one_hot_encoding_unittest.test_one_hot_encoding.TestOneHotEncoder) ... ok
+test_is_list (tests.one_hot_encoding_unittest.test_one_hot_encoding.TestOneHotEncoder) ... ok
+test_joke_not_in (tests.one_hot_encoding_unittest.test_one_hot_encoding.TestOneHotEncoder) ... ok
+test_numbers_eq (tests.one_hot_encoding_unittest.test_one_hot_encoding.TestOneHotEncoder) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK

@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.6, pytest-7.1.3, pluggy-1.0.0 -- /usr/bin/python
+cachedir: .pytest_cache
+rootdir: /home/bogdan/PycharmProjects/AAA/test_issues
+plugins: anyio-3.6.1
+collecting ... collected 10 items / 6 deselected / 4 selected
+
+tests/decode_tests/test_decode.py::test_decode_with_pytest_param[.- ...- .. - ----AVITO] PASSED [ 25%]
+tests/decode_tests/test_decode.py::test_decode_with_pytest_param[.- -. .- .-.. -.-- - .. -.-. ...-ANALYTICS] PASSED [ 50%]
+tests/decode_tests/test_decode.py::test_decode_with_pytest_param[.- -.-. .- -.. . -- -.---ACADEMY] PASSED [ 75%]
+tests/decode_tests/test_decode.py::test_decode_with_pytest_param[.--. -.-- - .... --- -.-PYTHON] PASSED [100%]
+
+======================= 4 passed, 6 deselected in 0.02s ========================
