@@ -1,5 +1,5 @@
 import click
-import pizza
+from src import pizza
 
 
 @click.group()
@@ -21,7 +21,7 @@ def order(pizza_name: str, delivery: bool, size: str) -> None:
     pizza_name = pizza_name.title()
     try:
         pizza_cls = getattr(pizza, pizza_name)
-        if pizza_cls not in pizza.menu.list:
+        if pizza_cls not in pizza.menu.list_menu:
             # raises if this attribute exists in pizza module
             # ,but it is __name__ or something like that, not real food
             raise ValueError(f"There are no {pizza_name} in our menu")

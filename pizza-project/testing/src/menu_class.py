@@ -1,4 +1,5 @@
-from helper_funcs import get_classes_from_module
+from src.helper_funcs import get_classes_from_module
+from src.food import Food
 
 
 class MenuObject:
@@ -18,20 +19,21 @@ class MenuObject:
                  module_name: str,
                  food_base_class):
         """
-        initializes the menu with all pizzas
+        initializes the menu with all food
         that are created as classes in this module.
         This is convenient because the end user
         does not need to think about whether
-        there is a pizza on the menu - as soon as the customer adds a new pizza
+        there is a food type on the menu -
+        as soon as the customer adds a new food
         with a new recipe here as a class - everything will already work.
         In addition to this it is a separate class
         that does not shit the module
         """
         self.bound_text = menu_text
         self.bound_width = menu_width
-        self.menu: dict = {}
+        self.list_menu: list = []
         for cls in get_classes_from_module(module_name):
-            if cls != food_base_class:
+            if cls not in [food_base_class, Food]:
                 self.update(cls)
 
     def update(self, eat_cls) -> None:
@@ -40,17 +42,15 @@ class MenuObject:
         takes all the necessary data from the passed class,
         corresponding to the type of food
         """
-        self.menu.update({eat_cls.to_str(): ", ".join(eat_cls.ingredients())})
-
-    @property
-    def list(self) -> list:
-        return list(self.menu.keys())
+        self.list_menu.append(eat_cls)
 
     def __str__(self) -> str:
         """
         method for printing menu
         """
         text = self.bound_text.center(self.bound_width, "-") + "\n"
-        for position, recipe in self.menu.items():
-            text += f"- {position}: {recipe}".ljust(self.bound_width) + "✅\n"
+        for pos in self.list_menu:
+            addition = f"- {pos.to_str()}: " + ", ".join(pos.ingredients())
+            addition = addition.ljust(self.bound_width)
+            text += addition + "✅\n"
         return text + text[: self.bound_width]

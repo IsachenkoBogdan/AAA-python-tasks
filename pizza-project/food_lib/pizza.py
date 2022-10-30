@@ -1,8 +1,9 @@
-from abc import ABC, abstractmethod
+from abc import ABCMeta, abstractmethod
 from time import sleep
 from time_config import baking_time, delivery_time, waiting_time
 from menu_class import MenuObject
 from helper_funcs import Logging
+from food import Food
 
 loggers = {
     "bake": Logging("Your pizza is 🔥baked🔥 in {}s"),
@@ -13,8 +14,7 @@ loggers = {
 
 # convenient way to use loggers for functions from the pizza module
 
-
-class Pizza(ABC):
+class Pizza(Food, metaclass=ABCMeta):
     """
     abstract pizza class
     """
@@ -31,20 +31,12 @@ class Pizza(ABC):
     @property
     @abstractmethod
     def recipes_dict(self) -> dict:
-        """
-        returns a dictionary from ingredients to recipe quantities with sizes
-        it is abstract, because we want to prohibit to make classes of Pizza
-        without recipe
-        """
-        return {"ingredient": "mass"}
+        pass
 
     @property
     @abstractmethod
     def icon(self) -> str:
-        """
-        pizza icon in cli
-        """
-        return "smile"
+        pass
 
     @abstractmethod
     def bake(self) -> None:
@@ -69,26 +61,6 @@ class Pizza(ABC):
         # Some logic of pizza giving to customer
         sleep(waiting_time)
 
-    @classmethod
-    def get_name(cls) -> str:
-        """
-        returns the name of the pizza that the class corresponds to.
-        uses for simplifications, in general, one could do without it,
-        but this method can be useful when using the module
-        """
-        return cls.__name__
-
-    @classmethod
-    def ingredients(cls) -> list:
-        """
-        returns a list of ingredients in a recipe
-        """
-        return cls.recipes_dict[cls.sizes[0]].keys()
-
-    @classmethod
-    def to_str(cls) -> str:
-        return f"{cls.get_name()} {cls.icon}"
-
     def dict(self) -> dict:
         """
         returns the pizza recipe as a dictionary,
@@ -103,15 +75,12 @@ class Pizza(ABC):
         """
         return self.dict() == other.dict()
 
-    def __str__(self):
-        return self.to_str()
-
 
 class Margherita(Pizza):
     icon: str = "🧀"
     recipes_dict = {
         "XL": {"tomato sauce": 100, "mozzarella": 100, "tomatoes": 100},
-        "L": {"tomato sauce": 100, "mozzarella": 100, "tomatoes": 100},
+        "L": {"tomato sauce": 100, "mozzarella": 200, "tomatoes": 100},
     }
 
     def bake(self) -> None:
@@ -122,7 +91,7 @@ class Margherita(Pizza):
 class Pepperoni(Pizza):
     icon: str = "🍕"
     recipes_dict = {
-        "XL": {"tomato sauce": 100, "mozzarella": 100, "pepperoni": 100},
+        "XL": {"tomato sauce": 100, "mozzarella": 200, "pepperoni": 100},
         "L": {"tomato sauce": 100, "mozzarella": 100, "pepperoni": 100},
     }
 
@@ -142,7 +111,7 @@ class Hawaiian(Pizza):
         },
         "L": {
             "tomato sauce": 100,
-            "mozzarella": 100,
+            "mozzarella": 50,
             "chicken": 100,
             "pineapples": 100,
         },
